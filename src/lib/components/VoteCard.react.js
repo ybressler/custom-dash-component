@@ -26,7 +26,6 @@ class VoteCard extends Component {
       this.state = {
         value:"",
         className:"vote-card",
-        data:"",
         activeVote:null,
         voteHistory:{
           superlike:0, // counts as positive vote but is a seperate entity
@@ -78,8 +77,8 @@ class VoteCard extends Component {
     }
 
     // Set the values
-    var currData = {"activeVote":voteName, "voteHistory":currVoteHist,};
-    this.props.setProps({activeVote:actVote, data:JSON.stringify(currData)})
+    // var currData = {"activeVote":voteName, "voteHistory":currVoteHist,};
+    this.props.setProps({activeVote:actVote)
   }
 
 
@@ -105,7 +104,7 @@ class VoteCard extends Component {
 
 
     render() {
-        const {id, label, className, setProps,voteHistory, activeVote, value, metadata, data} = this.props;
+        const {id, label, className, setProps,voteHistory, activeVote, value, metadata} = this.props;
 
         // Set the values of each button
         const classNameChoices = {
@@ -119,8 +118,7 @@ class VoteCard extends Component {
             <div id={id}
             className={className}
             activevote={`${activeVote}`}
-            data={`${data}`}
-            metadata={""}
+            metadata={`${metadata}`}
             >
                 <div className="votecard-value"
                 >
@@ -178,7 +176,6 @@ class VoteCard extends Component {
 VoteCard.defaultProps = {
     value:"keyword suggestion",
     className:"vote-card",
-    data:"",
     metadata:"{'type':'keyword'}",
     label:"default-label",
     activeVote:null,
@@ -213,11 +210,6 @@ VoteCard.propTypes = {
    */
   className: PropTypes.string,
 
-  /**
-  * The stored data for the id.
-  * This is where I'll store everything for now...
-  */
-  data: PropTypes.string,
 
   /**
    * Metadata about the item in the votecard
@@ -235,7 +227,6 @@ VoteCard.propTypes = {
   voteHistory: PropTypes.object,
 
 
-  children: PropTypes.node,
   /**
    * Dash-assigned callback that should be called to report property changes
    * to Dash, to make them available for callbacks.

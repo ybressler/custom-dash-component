@@ -21,9 +21,10 @@ Keyword arguments:
         self._type = 'VoteCard'
         self._namespace = 'vote_card'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'label', 'value']
+        self.available_properties = ['id', 'label', 'value', "activeVote", "metadata","voteHistory"]
         self.available_wildcard_properties =            []
 
+        
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
         _locals.update(kwargs)  # For wildcard attrs

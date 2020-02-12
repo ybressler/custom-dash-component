@@ -25,6 +25,28 @@
         "required": false,
         "description": "The value displayed in the input."
       },
+      "activeVote": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Current vote."
+      },
+      "voteHistory": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "History of votes, json form."
+      },
+
+      "metadata": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Metadata to be used in the thing."
+      },
       "setProps": {
         "type": {
           "name": "func"

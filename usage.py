@@ -10,7 +10,7 @@ app.layout = html.Div([
     vote_card.VoteCard(
         id='vote-card-1',
         label='my-label',
-        metadata="{some dictionary goes here}"
+        # metadata="{some dictionary goes here}"
     ),
     html.Div(id='output')
 ])
@@ -18,14 +18,13 @@ app.layout = html.Div([
 
 @app.callback(
     Output('output', 'children'),
-    [Input('vote-card-1', 'value')])
+    [Input('vote-card-1', 'activeVote')])
 def display_output(value):
-    if not value:
-        raise PreventUpdate
+    # if not value:
+    #     raise PreventUpdate
 
     return f"""
-    You have entered {value}
-    Like status: nothing yet
+    You have entered: {value}
     """
 
 
