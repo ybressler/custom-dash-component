@@ -108,10 +108,19 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist, 'superlike');
   }
 
-  const starsClick = (e) => {
+  starsClick = (e) => {
     if (e.target.parentElement.id === 'superlike-iconbutton-id') {
       alert('hello');
     }
+  }
+
+  wrappedStarsIcon() {
+        return (
+        <div onClick={this.starsClick}>
+        <StarsIcon votename="superlike" onClick={this.starsClick}/>
+        </>
+        )
+
   }
 
     render() {
@@ -136,6 +145,8 @@ class VoteCard extends Component {
                 {content}
                 </div>
 
+
+                <>
                 <IconButton
                     aria-label="superlike"
                     votename="superlike"
@@ -144,8 +155,9 @@ class VoteCard extends Component {
                     component="span"
                     id='superlike-iconbutton-id'
                     >
-                    <StarsIcon votename="superlike" onClick={this.starsClick}/>
                 </IconButton>
+                {this.wrappedStarsIcon()}
+                </>
 
                 <IconButton
                     aria-label="like"
