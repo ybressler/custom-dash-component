@@ -99,6 +99,15 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist,voteName)
   }
 
+  handleSuperLike = function(e) {
+    const history = this.state.voteHistory;
+    history['superlike'] += 1;
+    history.trackVotes.push('superlike');
+
+    this.setState({voteHistory: history, ...this.state})
+    this.props.setProps({voteHistory: history, ...this.props})
+    this.updateVote(history, 'superlike');
+  }
 
     render() {
         const {id, label, setProps,voteHistory, activeVote, value, content, metadata} = this.props;
@@ -126,7 +135,7 @@ class VoteCard extends Component {
                     aria-label="superlike"
                     votename="superlike"
                     isactive = {`${classNameChoices.superlike}`}
-                    onClick={this.handleVote}
+                    onClick={this.handleSuperLike}
                     component="span"
                     >
                     <StarsIcon votename="superlike"/>
