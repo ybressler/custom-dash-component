@@ -108,7 +108,7 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist, 'superlike');
   }
 
-  starsClick = (e) => {
+  const starsClick = (e) => {
     if (e.target.parentElement.id === 'superlike-iconbutton-id') {
       alert('hello');
     }
