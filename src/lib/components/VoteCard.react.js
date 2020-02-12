@@ -99,7 +99,7 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist,voteName)
   }
 
-  this.handleSuperLike = function(e) {
+  handleSuperLike = (e) => {
     const history = this.state.voteHistory;
     history['superlike'] += 1;
     history.trackVotes.push('superlike');
