@@ -25,7 +25,8 @@ class VoteCard extends Component {
     super(props);
       this.state = {
         value:"",
-        content:"",
+        className:"vote-card",
+        data:"",
         activeVote:null,
         voteHistory:{
           superlike:0, // counts as positive vote but is a seperate entity
@@ -34,17 +35,16 @@ class VoteCard extends Component {
           trackVotes:[]
         }
       }
-      this.updateValue = this.updateValue.bind(this);
       this.handleVote = this.handleVote.bind(this);
       this.updateVote = this.updateVote.bind(this);
+      // this.updateData = this.updateData.bind(this);
   }
 
-  updateValue(e){
-    e.preventDefault()
-    this.props.setProps({value:e.target.value})
-    // The shorter way to do it...
-    // e => this.props.setProps({value: e.target.value}
-  }
+  // updateData(currVoteHist, voteName){
+  //   var currData = {"activeVote":voteName, "voteHistory":currVoteHist};
+  //   this.props.setProps({data:JSON.stringify(currData)})
+  //   console.log(this.state)
+  // }
 
   updateVote(currVoteHist, voteName) {
     // Previous vote
@@ -78,13 +78,14 @@ class VoteCard extends Component {
     }
 
     // Set the values
-    this.props.setProps({activeVote:actVote})
-
+    var currData = {"activeVote":voteName, "voteHistory":currVoteHist,};
+    this.props.setProps({activeVote:actVote, data:JSON.stringify(currData)})
   }
 
 
   // Next handler
   handleVote(e){
+
     e.preventDefault()
 
     // console.log(event.target.getAttribute("isactive"))
@@ -104,7 +105,7 @@ class VoteCard extends Component {
 
 
     render() {
-        const {id, label, setProps,voteHistory, activeVote, value, content, metadata} = this.props;
+        const {id, label, className, setProps,voteHistory, activeVote, value, metadata, data} = this.props;
 
         // Set the values of each button
         const classNameChoices = {
@@ -116,13 +117,14 @@ class VoteCard extends Component {
 
         return (
             <div id={id}
-            className={`vote-card`}
+            className={className}
             activevote={`${activeVote}`}
+            data={`${data}`}
             metadata={""}
             >
-                <div className="votecard-content"
+                <div className="votecard-value"
                 >
-                {content}
+                {value}
                 </div>
 
                 <IconButton
@@ -174,8 +176,9 @@ class VoteCard extends Component {
 
 
 VoteCard.defaultProps = {
-    value:"",
-    content:"keyword suggestion",
+    value:"keyword suggestion",
+    className:"vote-card",
+    data:"",
     metadata:"{'type':'keyword'}",
     label:"default-label",
     activeVote:null,
@@ -201,14 +204,20 @@ VoteCard.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * The value displayed in the input.
+   * The value displayed in the votecard
    */
   value: PropTypes.string,
 
   /**
-   * The value displayed in the votecard
+   * The classname of the votecard
    */
-  content: PropTypes.string,
+  className: PropTypes.string,
+
+  /**
+  * The stored data for the id.
+  * This is where I'll store everything for now...
+  */
+  data: PropTypes.string,
 
   /**
    * Metadata about the item in the votecard
@@ -219,16 +228,24 @@ VoteCard.propTypes = {
    * The current vote of the object
    */
   activeVote: PropTypes.oneOf([null,'superlike','like', 'dislike']),
+
   /**
    * The history of the object
    */
   voteHistory: PropTypes.object,
 
+
+  children: PropTypes.node,
   /**
    * Dash-assigned callback that should be called to report property changes
    * to Dash, to make them available for callbacks.
    */
   setProps: PropTypes.func,
+
+  /**
+  * Dash-assigned callback that gets fired when the checkbox item gets selected.
+  */
+  fireEvent: PropTypes.func,
 
 };
 
