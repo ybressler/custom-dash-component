@@ -34,6 +34,7 @@ class VoteCard extends Component {
       this.updateValue = this.updateValue.bind(this);
       this.handleVote = this.handleVote.bind(this);
       this.updateVote = this.updateVote.bind(this);
+      this.handleSuperLike = this.handleSuperLike.bind(this);
   }
 
   updateValue(e){
@@ -99,15 +100,14 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist,voteName)
   }
 
-  handleSuperLike = (e) => {
-    const history = this.state.voteHistory;
-    history['superlike'] += 1;
-    history.trackVotes.push('superlike');
-
-    this.setState({voteHistory: history, ...this.state})
-    this.props.setProps({voteHistory: history, ...this.props})
-    this.updateVote(history, 'superlike');
+  handleSuperLike(e){
+    const currVoteHist = this.state.voteHistory;
+    currVoteHist['superlike'] += 1;
+    currVoteHist.trackVotes.push('superlike');
+    this.props.setProps({voteHistory:currVoteHist})
+    this.updateVote(currVoteHist, 'superlike');
   }
+
 
     render() {
         const {id, label, setProps,voteHistory, activeVote, value, content, metadata} = this.props;
