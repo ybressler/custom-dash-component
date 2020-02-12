@@ -108,6 +108,11 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist, 'superlike');
   }
 
+  starsClick = (e) => {
+    if (e.target.parentElement.id === 'superlike-iconbutton-id') {
+      alert('hello');
+    }
+  }
 
     render() {
         const {id, label, setProps,voteHistory, activeVote, value, content, metadata} = this.props;
@@ -137,8 +142,9 @@ class VoteCard extends Component {
                     isactive = {`${classNameChoices.superlike}`}
                     onClick={this.handleSuperLike}
                     component="span"
+                    id='superlike-iconbutton-id'
                     >
-                    <StarsIcon votename="superlike"/>
+                    <StarsIcon votename="superlike" onClick={this.starsClick}/>
                 </IconButton>
 
                 <IconButton
