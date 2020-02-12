@@ -6,6 +6,7 @@ import "./styles.css";
 import { IconButton } from '@material-ui/core';
 import StarsIcon from '@material-ui/icons/Stars';
 import NotInterestedIcon from '@material-ui/icons/NotInterested';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
 import ThumbDownAltOutlinedIcon from '@material-ui/icons/ThumbDownAltOutlined';
 // CONTINUE FROM HERE TOMORROW:
@@ -14,6 +15,8 @@ import ThumbDownAltOutlinedIcon from '@material-ui/icons/ThumbDownAltOutlined';
 
 
 // =========================================================
+
+
 
 class VoteCard extends Component {
 
@@ -34,7 +37,6 @@ class VoteCard extends Component {
       this.updateValue = this.updateValue.bind(this);
       this.handleVote = this.handleVote.bind(this);
       this.updateVote = this.updateVote.bind(this);
-      this.handleSuperLike = this.handleSuperLike.bind(this);
   }
 
   updateValue(e){
@@ -77,16 +79,16 @@ class VoteCard extends Component {
 
     // Set the values
     this.props.setProps({activeVote:actVote})
+
   }
 
 
   // Next handler
   handleVote(e){
     e.preventDefault()
-    // if (!e.target.name){e=e.target.parentElement}
-    // var voteName = e.target.getAttribute("aria-label")
-    // if(!voteName){voteName = e.target.getAttribute("label")}
-    // if(!voteName){voteName = e.target.name}
+
+    // console.log(event.target.getAttribute("isactive"))
+
     // Update the state with proper values
     const voteName = e.target.getAttribute("votename");
     const currVoteHist = this.state.voteHistory;
@@ -100,28 +102,6 @@ class VoteCard extends Component {
     this.updateVote(currVoteHist,voteName)
   }
 
-  handleSuperLike(e){
-    const currVoteHist = this.state.voteHistory;
-    currVoteHist['superlike'] += 1;
-    currVoteHist.trackVotes.push('superlike');
-    this.props.setProps({voteHistory:currVoteHist})
-    this.updateVote(currVoteHist, 'superlike');
-  }
-
-  starsClick = (e) => {
-    if (e.target.parentElement.id === 'superlike-iconbutton-id') {
-      alert('hello');
-    }
-  }
-
-  wrappedStarsIcon() {
-        return (
-        <div onClick={this.starsClick}>
-        <StarsIcon votename="superlike" onClick={this.starsClick}/>
-        </>
-        )
-
-  }
 
     render() {
         const {id, label, setProps,voteHistory, activeVote, value, content, metadata} = this.props;
@@ -145,72 +125,46 @@ class VoteCard extends Component {
                 {content}
                 </div>
 
-
-                <>
-                <IconButton
-                    aria-label="superlike"
-                    votename="superlike"
-                    isactive = {`${classNameChoices.superlike}`}
-                    onClick={this.handleSuperLike}
-                    component="span"
-                    id='superlike-iconbutton-id'
-                    >
-                </IconButton>
-                {this.wrappedStarsIcon()}
-                </>
-
-                <IconButton
-                    aria-label="like"
-                    votename="like"
-                    isactive = {`${classNameChoices.like}`}
-                    onClick={this.handleVote}
-                    component="span"
-                    >
-                    <ThumbUpAltOutlinedIcon votename="like"/>
-                </IconButton>
-
                 <IconButton
                     aria-label="dislike"
                     votename="dislike"
-                    isactive = {`${classNameChoices.dislike}`}
                     onClick={this.handleVote}
+                    isactive = {`${classNameChoices.dislike}`}
                     component="span"
                     >
-                    <ThumbDownAltOutlinedIcon votename="dislike"/>
+                    <ThumbDownAltOutlinedIcon
+                      votename="dislike"
+                      className={`dislike-isactive-${classNameChoices.dislike}`}
+                      />
                 </IconButton>
 
-                <div>
-                    <button
-                      name="superlike"
-                      type="button"
-                      className= {`vote-superlike`}
-                      isactive = {`${classNameChoices.superlike}`}
-                      onClick={this.handleVote}
-                    >
-                      "SUPERLIKE"
-                    </button>
 
-                    <button
-                      name="like"
-                      type="button"
-                      className= {`vote-like`}
-                      isactive = {`${classNameChoices.like}`}
-                      onClick={this.handleVote}
+                <IconButton
+                    aria-label="superlike"
+                    votename="superlike"
+                    onClick={this.handleVote}
+                    isactive = {`${classNameChoices.superlike}`}
+                    component="span"
                     >
-                      "LIKE"
-                    </button>
-                    <button
-                      name="dislike"
-                      type="button"
-                      className= {`vote-dislike`}
-                      isactive = {`${classNameChoices.dislike}`}
-                      onClick={this.handleVote}
-                    >
-                      "DISLIKE"
-                    </button>
-                </div>
+                    <StarsIcon
+                      // className="icon-superlike"
+                      className={`superlike-isactive-${classNameChoices.superlike}`}
+                      votename="superlike"
+                    />
+                </IconButton>
 
-              <p>Current Vote: {activeVote}</p>
+
+                <IconButton
+                    aria-label="like"
+                    onClick={this.handleVote}
+                    isactive = {`${classNameChoices.like}`}
+                    component="span"
+                    >
+                    <ThumbUpAltOutlinedIcon
+                      votename="like"
+                      className={`like-isactive-${classNameChoices.like}`}
+                    />
+                </IconButton>
 
             </div>
 
