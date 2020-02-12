@@ -1,0 +1,57 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.vote-card{
+  /* background-color: grey; */
+  padding:10px;
+}
+
+button {
+  width: 105px;
+  height: 40px;
+  margin: 0.5rem;
+  color:black;
+  border-radius: 2rem;
+  /* border: 1px solid black; */
+  transform: scale(0.8)
+}
+
+/* We always want a cursor */
+button:hover {
+  cursor: pointer;
+}
+
+button[isActive=true]{
+  font-weight: bold;
+  color:white;
+  transform: scale(1.1)
+}
+
+
+button.vote-superlike{
+  background-color: skyblue;
+}
+
+button.vote-superlike[isActive=true]{
+  background-color: blue;
+  border: 2px solid black;
+}
+
+button.vote-like{
+  background-color: lightgreen;
+}
+
+button.vote-like[isActive=true]{
+  background-color: green;
+  border: 2px solid darkgreen;
+}
+
+button.vote-dislike{
+  background-color: maroon;
+}
+button.vote-dislike[isActive=true]{
+  background-color: red;
+  border: 2px solid darkred;
+}

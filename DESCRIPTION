@@ -1,0 +1,15 @@
+Package: voteCard
+Title: Custom voting component
+Version: 0.0.1
+Description: Custom voting component
+Depends: R (>= 3.0.2)
+Imports: 
+Suggests: 
+License: MIT + file LICENSE
+URL: 
+BugReports: 
+Encoding: UTF-8
+LazyData: true
+KeepSource: true
+Author: Yaakov Bressler [aut]
+Maintainer: Yaakov Bressler <yb@yaakovbressler.com>

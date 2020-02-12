@@ -1,0 +1,7 @@
+include vote_card/vote_card.min.js
+include vote_card/vote_card.min.js.map
+include vote_card/metadata.json
+include vote_card/package-info.json
+include README.md
+include LICENSE
+include package.json
